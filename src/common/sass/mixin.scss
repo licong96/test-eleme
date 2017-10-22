@@ -1,0 +1,78 @@
+// 1px边框
+@mixin border-b-1px($cost){
+  position: relative;
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: $cost;
+    width: 100%;
+    border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+}
+// 处理 2x 和 3x 图片
+@mixin bg-image($url) {
+  background-image: url("../../assets/"+$url+"@2x.png");
+  @media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3) {
+    background-image: url("../../assets/"+$url+"@3x.png");
+  }
+}
+// 评论的星星 star.vue
+@mixin star-count($val, $right, $star){
+  .star-item{
+    width: $val;
+    height: $val;
+    margin-right: $right;
+    background-size: $val $val;
+    &:last-child{
+      margin-right: 0;
+    }
+    &.on{
+      @include bg-image($star+'_on');
+    }
+    &.half{
+      @include bg-image($star+'_half');
+    }
+    &.off{
+      @include bg-image($star+'_off');
+    }
+  }
+}
+// 优惠
+@mixin supports($val1, $val2, $val3) {
+  display: flex;
+  align-items: center;
+  .icon{
+    width: $val1;
+    height: $val1;
+    margin-right: $val2;
+    background-size: $val1;
+    background-repeat: no-repeat;
+    &.decrease{
+      @include bg-image('decrease_'+$val3);
+    }
+    &.discount{
+      @include bg-image('discount_'+$val3);
+    }
+    &.guarantee{
+      @include bg-image('guarantee_'+$val3);
+    }
+    &.invoice{
+      @include bg-image('invoice_'+$val3);
+    }
+    &.special{
+      @include bg-image('special_'+$val3);
+    }
+  }
+  .text{
+    font-size: 12px;
+  }
+}
+
+// 颜色
+$color1: rgb(7, 17, 27);
+$color2: rgb(147, 153, 159);
